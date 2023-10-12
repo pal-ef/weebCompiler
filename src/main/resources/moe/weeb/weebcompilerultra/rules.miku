@@ -1,5 +1,24 @@
 # Comment line
 # Rules go by the next definition key:value NO SPACES IN BETWEEN
-int:type
-float:type
-string:type
+int:(4)type
+float:(4)type
+string:(4)type
+void:(4)type
+
+# Relational operators
+<:relationalOperator
+>:relationalOperator
+<=:relationalOperator
+>=:relationalOperator
+
+# OR Operator
+||:(8)orOperator
+&&:(9)andOperator
+!:(10)notOperator
+
+# Conditionals
+if:(19)conditional
+while:(20)loop
+return:(21)return
+else:(22)conditional
+$:(23)terminal

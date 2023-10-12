@@ -52,17 +52,57 @@ public class Lexer {
     }
 
     private boolean isSpecialChar(char c) {
+        // TODO This would be more efficient as a hashmap
+        // TODO There is no way to detect ==, ++, --
         switch (c) {
             case ' ' -> {
                 specialToken = "";
                 return true;
             }
             case ';' -> {
-                specialToken = ";";
+                specialToken = "(12)semicolon: ;";
                 return true;
             }
             case '=' -> {
-                specialToken = "assignment: =";
+                specialToken = "(18)assignment: =";
+                return true;
+            }
+            // OPERATORS
+            case '+' -> {
+                specialToken = "(5)sum operator: +";
+                return true;
+            }
+            case '-' -> {
+                specialToken = "(5)subtraction operator: -";
+                return true;
+            }
+            case '*' -> {
+                specialToken = "(5)multiplication operator: *";
+                return true;
+            }
+            case '/' -> {
+                specialToken = "(5)division operator: /";
+                return true;
+            }
+            // Enclosing characters
+            case '(' -> {
+                specialToken = "(14)parenthesis start: (";
+                return true;
+            }
+            case ')' -> {
+                specialToken = "(15)parenthesis end: )";
+                return true;
+            }
+//            case '[' -> {
+//                specialToken = "brackets start: [";
+//                return true;
+//            }
+//            case ']' -> {
+//                specialToken = "brackets end: ]";
+//                return true;
+//            }
+            case '"' -> {
+                specialToken = "(3)string";
                 return true;
             }
         }
@@ -91,16 +131,16 @@ public class Lexer {
         }
         // Determine if symbol is an adequate identifier
         if(isValidIdentifier(symbol)) {
-            tokens.add("identifier: " + symbol);
+            tokens.add("(0)identifier: " + symbol);
             return;
         }
         // Determine if symbol is a integer or float
         if(isInteger(symbol)) {
-            tokens.add("integer: " + symbol);
+            tokens.add("(1)integer: " + symbol);
             return;
         };
         if(isFloat(symbol)) {
-            tokens.add("float: " + symbol);
+            tokens.add("(2)float: " + symbol);
             return;
         }
         // Invalid token, thus inserting a invalidToken
@@ -129,20 +169,35 @@ public class Lexer {
         // Read character by character and determine if is valid symbol
         StringBuilder currentString = new StringBuilder();
         char current;
+        int quoteCounter = 0;
 
         for (int i = 0; i < input.length(); i++) {
             current = input.charAt(i);
             currentString.append(current);
 
-            // If special char is detected send symbol to evaluation
-            if (isSpecialChar(current)) {
-                // Send to evaluation the currentString minus 1
-                String symbol = currentString.toString();
-                isValidSymbol(symbol.substring(0, symbol.length()-1).trim());
-                if(!specialToken.isBlank()) tokens.add(specialToken);
-                currentString = new StringBuilder();
+            // Detect string
+            if(current == '"') quoteCounter++;
+
+            // Execute only if there is a pair of quotes
+            if(quoteCounter % 2 == 0) {
+                // if pair in between quotes sent as string
+                if(quoteCounter == 2) {
+                    tokens.add("(3)string: " + currentString.toString());
+                    currentString = new StringBuilder();
+                    quoteCounter = 0;
+                    continue;
+                }
+                // If special char is detected send symbol to evaluation
+                if (isSpecialChar(current)) {
+                    // Send to evaluation the currentString minus 1
+                    String symbol = currentString.toString();
+                    isValidSymbol(symbol.substring(0, symbol.length() - 1).trim());
+                    if (!specialToken.isBlank()) tokens.add(specialToken);
+                    currentString = new StringBuilder();
+                }
             }
         }
+
         // In case that input string had no special chars nor whitespaces
         if(!currentString.isEmpty()) {
             String symbol = currentString.toString();

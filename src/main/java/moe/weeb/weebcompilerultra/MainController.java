@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class MainController {
         startLexer();
     }
 
+    // TODO Deal with file opening method
     public void fileOpen() {
         FileChooser chooser = new FileChooser();
         File selectedFile = chooser.showOpenDialog(lexerResult.getContextMenu());
