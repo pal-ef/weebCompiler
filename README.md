@@ -1,7 +1,6 @@
 # The WeebCompiler Ultra Special Edition
 A visual compiler made in Java for learning purposes. *Work in progress*
-
-<img width="876" alt="Screenshot 2023-10-11 at 19 51 27" src="https://github.com/pal-ef/weebCompiler/assets/63682116/ccda58d1-4f16-49be-9488-ab73310fb506">
+<img width="945" alt="Screenshot 2023-10-11 at 19 59 38" src="https://github.com/pal-ef/weebCompiler/assets/63682116/65624ac8-a036-4351-a2cc-ecfcd4ae51b4">
 
 ### What is this?
 It's your every day compiler really, with a basic **Lexer** and **Parser**.
