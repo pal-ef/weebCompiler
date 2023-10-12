@@ -1,0 +1,12 @@
+.root {
+    -fx-background-color: '#E9EBF2';
+}
+
+.label {
+    -fx-font-size: 12;
+    -fx-font-weight: 400;
+    -fx-text-fill: '#424242';
+}
+
+#textEditor {
+}

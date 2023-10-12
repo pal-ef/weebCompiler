@@ -1,0 +1,5 @@
+# Comment line
+# Rules go by the next definition key:value NO SPACES IN BETWEEN
+int:type
+float:type
+string:type
